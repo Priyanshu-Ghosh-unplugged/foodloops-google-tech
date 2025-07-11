@@ -3,6 +3,7 @@ import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Leaf } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -38,12 +39,12 @@ const Footer = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Company Info */}
             <div className="space-y-4">
-              <div className="flex items-center space-x-2">
+              <Link to="/" className="flex items-center space-x-2">
                 <div className="w-10 h-10 brass-gradient rounded-full flex items-center justify-center">
                   <span className="text-white font-bold text-lg">FL</span>
                 </div>
                 <h3 className="text-2xl font-poppins font-bold">FoodLoops</h3>
-              </div>
+              </Link>
               <p className="text-white/80 font-inter leading-relaxed">
                 Revolutionizing food waste reduction through smart technology, 
                 community engagement, and sustainable shopping practices.
@@ -68,13 +69,36 @@ const Footer = () => {
             <div>
               <h4 className="text-lg font-dm-sans font-semibold mb-6">Quick Links</h4>
               <ul className="space-y-3">
-                {['Browse Deals', 'How It Works', 'For Retailers', 'Community', 'Impact Dashboard', 'Recipe Hub'].map(link => (
-                  <li key={link}>
-                    <a href="#" className="text-white/80 hover:text-gold transition-colors font-inter">
-                      {link}
-                    </a>
-                  </li>
-                ))}
+                <li>
+                  <Link to="/deals" className="text-white/80 hover:text-gold transition-colors font-inter">
+                    Browse Deals
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/sellers" className="text-white/80 hover:text-gold transition-colors font-inter">
+                    For Retailers
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/community" className="text-white/80 hover:text-gold transition-colors font-inter">
+                    Community
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/impact" className="text-white/80 hover:text-gold transition-colors font-inter">
+                    Impact Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <a href="#" className="text-white/80 hover:text-gold transition-colors font-inter">
+                    Recipe Hub
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-white/80 hover:text-gold transition-colors font-inter">
+                    How It Works
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -82,13 +106,36 @@ const Footer = () => {
             <div>
               <h4 className="text-lg font-dm-sans font-semibold mb-6">Support</h4>
               <ul className="space-y-3">
-                {['Help Center', 'FAQs', 'Contact Support', 'Safety Guidelines', 'Seller Resources', 'App Download'].map(link => (
-                  <li key={link}>
-                    <a href="#" className="text-white/80 hover:text-gold transition-colors font-inter">
-                      {link}
-                    </a>
-                  </li>
-                ))}
+                <li>
+                  <a href="#" className="text-white/80 hover:text-gold transition-colors font-inter">
+                    Help Center
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-white/80 hover:text-gold transition-colors font-inter">
+                    FAQs
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-white/80 hover:text-gold transition-colors font-inter">
+                    Contact Support
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-white/80 hover:text-gold transition-colors font-inter">
+                    Safety Guidelines
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-white/80 hover:text-gold transition-colors font-inter">
+                    Seller Resources
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-white/80 hover:text-gold transition-colors font-inter">
+                    App Download
+                  </a>
+                </li>
               </ul>
             </div>
 
