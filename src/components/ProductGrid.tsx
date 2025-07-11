@@ -1,20 +1,22 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Clock, MapPin, Star, Heart, Zap } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { useCart } from '@/contexts/CartContext';
+import { calculateDynamicPrice, Product } from '@/utils/pricingAlgorithm';
 
 const ProductGrid = () => {
   const [favorites, setFavorites] = useState<number[]>([]);
+  const { addToCart } = useCart();
 
-  const products = [
+  const initialProducts: Product[] = [
     {
       id: 1,
       name: "Organic Apples",
       originalPrice: 12.99,
-      currentPrice: 3.99,
-      discount: 69,
+      baseDiscount: 45,
       expiryHours: 18,
       store: "Green Market",
       distance: "0.5 miles",
@@ -27,8 +29,7 @@ const ProductGrid = () => {
       id: 2,
       name: "Fresh Salmon Fillet",
       originalPrice: 24.99,
-      currentPrice: 8.99,
-      discount: 64,
+      baseDiscount: 40,
       expiryHours: 12,
       store: "Ocean Fresh",
       distance: "0.8 miles",
@@ -41,8 +42,7 @@ const ProductGrid = () => {
       id: 3,
       name: "Artisan Bread Loaf",
       originalPrice: 8.99,
-      currentPrice: 2.99,
-      discount: 67,
+      baseDiscount: 35,
       expiryHours: 8,
       store: "Baker's Corner",
       distance: "1.2 miles",
@@ -55,8 +55,7 @@ const ProductGrid = () => {
       id: 4,
       name: "Greek Yogurt Pack",
       originalPrice: 15.99,
-      currentPrice: 5.99,
-      discount: 63,
+      baseDiscount: 30,
       expiryHours: 36,
       store: "Dairy Delights",
       distance: "0.3 miles",
@@ -69,8 +68,7 @@ const ProductGrid = () => {
       id: 5,
       name: "Premium Cheese Selection",
       originalPrice: 32.99,
-      currentPrice: 12.99,
-      discount: 61,
+      baseDiscount: 25,
       expiryHours: 48,
       store: "Cheese Masters",
       distance: "1.5 miles",
@@ -83,8 +81,7 @@ const ProductGrid = () => {
       id: 6,
       name: "Fresh Vegetable Mix",
       originalPrice: 18.99,
-      currentPrice: 6.99,
-      discount: 63,
+      baseDiscount: 35,
       expiryHours: 24,
       store: "Farm Fresh",
       distance: "0.7 miles", 
@@ -94,6 +91,22 @@ const ProductGrid = () => {
       ecoScore: 83
     }
   ];
+
+  const [products, setProducts] = useState(initialProducts);
+
+  // Update prices every 30 seconds to simulate real-time pricing
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProducts(prevProducts => 
+        prevProducts.map(product => ({
+          ...product,
+          expiryHours: Math.max(0, product.expiryHours - 0.1) // Reduce by 6 minutes
+        }))
+      );
+    }, 30000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const toggleFavorite = (id: number) => {
     setFavorites(prev => 
@@ -107,6 +120,20 @@ const ProductGrid = () => {
     if (hours <= 12) return { level: 'high', color: 'bg-red-500', text: 'Very Urgent' };
     if (hours <= 24) return { level: 'medium', color: 'bg-orange-500', text: 'Urgent' };
     return { level: 'low', color: 'bg-yellow-500', text: 'Soon' };
+  };
+
+  const handleAddToCart = (product: Product) => {
+    const { currentPrice, discount } = calculateDynamicPrice(product);
+    addToCart({
+      id: product.id,
+      title: product.name,
+      price: currentPrice,
+      originalPrice: product.originalPrice,
+      store: product.store,
+      image: product.image,
+      expiresIn: `${Math.floor(product.expiryHours)}h`,
+      expiryHours: product.expiryHours
+    });
   };
 
   return (
@@ -124,27 +151,24 @@ const ProductGrid = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product) => {
+            const { currentPrice, discount } = calculateDynamicPrice(product);
             const urgency = getUrgencyLevel(product.expiryHours);
             const isFavorite = favorites.includes(product.id);
             
             return (
               <Card key={product.id} className="group bg-white/90 backdrop-blur-sm border-gold/20 hover:shadow-xl transition-all duration-300 overflow-hidden">
-                {/* Product Image & Badges */}
                 <div className="relative p-6 bg-gradient-to-br from-gold/5 to-green/5">
                   <div className="text-6xl text-center mb-4">{product.image}</div>
                   
-                  {/* Discount Badge */}
                   <Badge className="absolute top-4 left-4 brass-gradient text-white font-bold">
-                    -{product.discount}%
+                    -{discount}%
                   </Badge>
                   
-                  {/* Urgency Badge */}
                   <Badge className={`absolute top-4 right-4 ${urgency.color} text-white`}>
                     <Clock className="w-3 h-3 mr-1" />
                     {urgency.text}
                   </Badge>
                   
-                  {/* Favorite Button */}
                   <Button
                     variant="ghost"
                     size="sm"
@@ -157,7 +181,6 @@ const ProductGrid = () => {
                   </Button>
                 </div>
 
-                {/* Product Details */}
                 <div className="p-6 pt-0">
                   <div className="flex items-center justify-between mb-2">
                     <Badge variant="outline" className="text-xs border-gold/30 text-gold">
@@ -175,7 +198,7 @@ const ProductGrid = () => {
                   
                   <div className="flex items-center space-x-2 mb-3">
                     <span className="text-2xl font-poppins font-bold text-gold">
-                      ${product.currentPrice}
+                      ${currentPrice}
                     </span>
                     <span className="text-sm text-muted-foreground line-through">
                       ${product.originalPrice}
@@ -196,15 +219,16 @@ const ProductGrid = () => {
                   <div className="flex items-center justify-between mb-4">
                     <div className="text-sm font-medium text-primary">
                       <Clock className="w-4 h-4 inline mr-1" />
-                      {product.expiryHours}h left
+                      {Math.floor(product.expiryHours)}h left
                     </div>
                     <div className="text-xs text-green">
-                      Save ${(product.originalPrice - product.currentPrice).toFixed(2)}
+                      Save ${(product.originalPrice - currentPrice).toFixed(2)}
                     </div>
                   </div>
                   
                   <Button 
                     className="w-full brass-gradient text-white font-dm-sans font-semibold rounded-lg glow-hover transition-all duration-300"
+                    onClick={() => handleAddToCart(product)}
                   >
                     Add to Cart
                   </Button>

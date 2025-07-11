@@ -1,52 +1,17 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useCart } from '@/contexts/CartContext';
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      title: "Fresh Organic Bananas",
-      price: 2.49,
-      originalPrice: 4.99,
-      quantity: 2,
-      store: "GreenMart",
-      image: "/placeholder.svg",
-      expiresIn: "2 hours"
-    },
-    {
-      id: 2,
-      title: "Artisan Bread Loaf",
-      price: 3.49,
-      originalPrice: 6.99,
-      quantity: 1,
-      store: "Baker's Corner",
-      image: "/placeholder.svg",
-      expiresIn: "4 hours"
-    }
-  ]);
+  const { cartItems, updateQuantity, removeFromCart, totalPrice } = useCart();
 
-  const updateQuantity = (id: number, newQuantity: number) => {
-    if (newQuantity === 0) {
-      setCartItems(cartItems.filter(item => item.id !== id));
-    } else {
-      setCartItems(cartItems.map(item => 
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      ));
-    }
-  };
-
-  const removeItem = (id: number) => {
-    setCartItems(cartItems.filter(item => item.id !== id));
-  };
-
-  const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const originalTotal = cartItems.reduce((sum, item) => sum + (item.originalPrice * item.quantity), 0);
-  const savings = originalTotal - total;
+  const savings = originalTotal - totalPrice;
 
   return (
     <div className="min-h-screen bg-background">
@@ -77,18 +42,14 @@ const Cart = () => {
                 <Card key={item.id}>
                   <CardContent className="p-6">
                     <div className="flex items-center space-x-4">
-                      <img 
-                        src={item.image} 
-                        alt={item.title}
-                        className="w-20 h-20 object-cover rounded-lg"
-                      />
+                      <div className="text-4xl">{item.image}</div>
                       <div className="flex-1">
                         <h3 className="font-dm-sans font-semibold text-lg">{item.title}</h3>
                         <p className="text-sm text-muted-foreground">{item.store}</p>
                         <p className="text-sm text-red-500">Expires in {item.expiresIn}</p>
                         <div className="flex items-center space-x-2 mt-2">
-                          <span className="text-lg font-bold text-gold">${item.price}</span>
-                          <span className="text-sm text-muted-foreground line-through">${item.originalPrice}</span>
+                          <span className="text-lg font-bold text-gold">${item.price.toFixed(2)}</span>
+                          <span className="text-sm text-muted-foreground line-through">${item.originalPrice.toFixed(2)}</span>
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
@@ -111,7 +72,7 @@ const Cart = () => {
                       <Button 
                         size="sm" 
                         variant="ghost"
-                        onClick={() => removeItem(item.id)}
+                        onClick={() => removeFromCart(item.id)}
                         className="text-red-500 hover:text-red-700"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -134,7 +95,7 @@ const Cart = () => {
                   </div>
                   <div className="flex justify-between">
                     <span>Your Total:</span>
-                    <span className="font-bold text-gold">${total.toFixed(2)}</span>
+                    <span className="font-bold text-gold">${totalPrice.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-green-600">
                     <span>You Save:</span>
