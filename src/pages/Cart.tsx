@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
@@ -9,9 +10,14 @@ import { useCart } from '@/contexts/CartContext';
 
 const Cart = () => {
   const { cartItems, updateQuantity, removeFromCart, totalPrice } = useCart();
+  const navigate = useNavigate();
 
   const originalTotal = cartItems.reduce((sum, item) => sum + (item.originalPrice * item.quantity), 0);
   const savings = originalTotal - totalPrice;
+
+  const handleCheckout = () => {
+    navigate('/checkout');
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -31,7 +37,10 @@ const Cart = () => {
             <ShoppingBag className="w-24 h-24 text-muted-foreground mx-auto mb-4" />
             <h2 className="text-2xl font-poppins font-semibold mb-2">Your cart is empty</h2>
             <p className="text-muted-foreground mb-6">Discover amazing deals on near-expiry items</p>
-            <Button className="brass-gradient hover:shadow-lg">
+            <Button 
+              className="brass-gradient hover:shadow-lg"
+              onClick={() => navigate('/deals')}
+            >
               Browse Deals
             </Button>
           </div>
@@ -48,8 +57,8 @@ const Cart = () => {
                         <p className="text-sm text-muted-foreground">{item.store}</p>
                         <p className="text-sm text-red-500">Expires in {item.expiresIn}</p>
                         <div className="flex items-center space-x-2 mt-2">
-                          <span className="text-lg font-bold text-gold">${item.price.toFixed(2)}</span>
-                          <span className="text-sm text-muted-foreground line-through">${item.originalPrice.toFixed(2)}</span>
+                          <span className="text-lg font-bold text-gold">₹{item.price.toFixed(2)}</span>
+                          <span className="text-sm text-muted-foreground line-through">₹{item.originalPrice.toFixed(2)}</span>
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
@@ -91,18 +100,21 @@ const Cart = () => {
                 <CardContent className="space-y-4">
                   <div className="flex justify-between">
                     <span>Original Total:</span>
-                    <span className="line-through text-muted-foreground">${originalTotal.toFixed(2)}</span>
+                    <span className="line-through text-muted-foreground">₹{originalTotal.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Your Total:</span>
-                    <span className="font-bold text-gold">${totalPrice.toFixed(2)}</span>
+                    <span className="font-bold text-gold">₹{totalPrice.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-green-600">
                     <span>You Save:</span>
-                    <span className="font-bold">${savings.toFixed(2)}</span>
+                    <span className="font-bold">₹{savings.toFixed(2)}</span>
                   </div>
                   <div className="border-t pt-4">
-                    <Button className="w-full brass-gradient hover:shadow-lg">
+                    <Button 
+                      className="w-full brass-gradient hover:shadow-lg"
+                      onClick={handleCheckout}
+                    >
                       Proceed to Checkout
                     </Button>
                   </div>

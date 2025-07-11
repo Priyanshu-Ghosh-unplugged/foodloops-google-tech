@@ -15,11 +15,11 @@ const ProductGrid = () => {
     {
       id: 1,
       name: "Organic Apples",
-      originalPrice: 12.99,
+      originalPrice: 950,
       baseDiscount: 45,
       expiryHours: 18,
       store: "Green Market",
-      distance: "0.5 miles",
+      distance: "0.5 km",
       rating: 4.8,
       image: "🍎",
       category: "Fruits",
@@ -28,11 +28,11 @@ const ProductGrid = () => {
     {
       id: 2,
       name: "Fresh Salmon Fillet",
-      originalPrice: 24.99,
+      originalPrice: 1899,
       baseDiscount: 40,
       expiryHours: 12,
       store: "Ocean Fresh",
-      distance: "0.8 miles",
+      distance: "0.8 km",
       rating: 4.9,
       image: "🐟",
       category: "Seafood",
@@ -41,11 +41,11 @@ const ProductGrid = () => {
     {
       id: 3,
       name: "Artisan Bread Loaf",
-      originalPrice: 8.99,
+      originalPrice: 699,
       baseDiscount: 35,
       expiryHours: 8,
       store: "Baker's Corner",
-      distance: "1.2 miles",
+      distance: "1.2 km",
       rating: 4.7,
       image: "🍞",
       category: "Bakery",
@@ -54,11 +54,11 @@ const ProductGrid = () => {
     {
       id: 4,
       name: "Greek Yogurt Pack",
-      originalPrice: 15.99,
+      originalPrice: 1299,
       baseDiscount: 30,
       expiryHours: 36,
       store: "Dairy Delights",
-      distance: "0.3 miles",
+      distance: "0.3 km",
       rating: 4.6,
       image: "🥛",
       category: "Dairy",
@@ -67,11 +67,11 @@ const ProductGrid = () => {
     {
       id: 5,
       name: "Premium Cheese Selection",
-      originalPrice: 32.99,
+      originalPrice: 2599,
       baseDiscount: 25,
       expiryHours: 48,
       store: "Cheese Masters",
-      distance: "1.5 miles",
+      distance: "1.5 km",
       rating: 4.9,
       image: "🧀",
       category: "Dairy",
@@ -80,11 +80,11 @@ const ProductGrid = () => {
     {
       id: 6,
       name: "Fresh Vegetable Mix",
-      originalPrice: 18.99,
+      originalPrice: 1449,
       baseDiscount: 35,
       expiryHours: 24,
       store: "Farm Fresh",
-      distance: "0.7 miles", 
+      distance: "0.7 km", 
       rating: 4.5,
       image: "🥬",
       category: "Vegetables",
@@ -198,10 +198,10 @@ const ProductGrid = () => {
                   
                   <div className="flex items-center space-x-2 mb-3">
                     <span className="text-2xl font-poppins font-bold text-gold">
-                      ${currentPrice}
+                      ₹{currentPrice.toFixed(2)}
                     </span>
                     <span className="text-sm text-muted-foreground line-through">
-                      ${product.originalPrice}
+                      ₹{product.originalPrice.toFixed(2)}
                     </span>
                   </div>
                   
@@ -222,7 +222,7 @@ const ProductGrid = () => {
                       {Math.floor(product.expiryHours)}h left
                     </div>
                     <div className="text-xs text-green">
-                      Save ${(product.originalPrice - currentPrice).toFixed(2)}
+                      Save ₹{(product.originalPrice - currentPrice).toFixed(2)}
                     </div>
                   </div>
                   
