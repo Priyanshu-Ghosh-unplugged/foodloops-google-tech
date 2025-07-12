@@ -1,124 +1,271 @@
-# FoodLoops - React + Firebase E-commerce App
+# 🍔 FoodLoops - Reduce Waste, Share Abundance
 
-A modern e-commerce application built with React, TypeScript, and Firebase backend.
+FoodLoops is a dynamic web application designed to combat food waste by connecting sellers of surplus food with conscientious buyers. Leveraging a dynamic pricing model, prices for items decrease as their expiration dates approach, ensuring that food gets sold rather than discarded.
 
-## 🚀 Quick Start
+## ✨ Key Features
+
+- **Dynamic Pricing**: An intelligent algorithm automatically reduces item prices as they near their expiration date, maximizing the chance of a sale.
+- **Dual User Roles**: Caters to both Buyers looking for great deals and Sellers (restaurants, bakeries, etc.) wanting to reduce surplus inventory.
+- **Eco-Dashboard**: A personalized dashboard for users to track their positive environmental impact, including money saved, CO₂ emissions reduced, and water conserved.
+- **Community Hub**: A social space for users to connect, share recipes, and exchange food-saving tips.
+- **Web3 Integration**: Secure, decentralized authentication using Civic Pass and blockchain integration for future rewards and transactions.
+- **Comprehensive Backend**: A robust Node.js/Express server to manage users, products, and orders.
+- **AI-Powered Chatbot**: Google Gemini-powered chatbot to help users with food deals, recipes, and sustainability tips.
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **React** with **Vite** and **TypeScript**
+- **Tailwind CSS** with **Shadcn/UI** components
+- **TanStack Query** for state management
+- **Google Gemini AI** for intelligent chatbot
+
+### Web3
+- **Wagmi** and **Ethers.js** for Ethereum integration
+- **Civic Auth** for decentralized authentication
+- **WalletConnect** for wallet connections
+
+### Backend
+- **Node.js** with **Express** framework
+- **MongoDB** with **Mongoose** ODM
+- **Firebase** for authentication and real-time features
+
+### Blockchain
+- **Rewards**: Solidity (Ethereum)
+- **Core Logic (WIP)**: Move (Aptos)
+- **Tooling**: Hardhat, Vercel, ESLint, Prettier
+
+## 🚀 Getting Started
+
+Follow these instructions to get the FoodLoops application running on your local machine.
 
 ### Prerequisites
-- Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-- A Google account (for Firebase setup)
 
-### Setup Instructions
+- Node.js (v18 or later)
+- npm
+- MongoDB installed and running
+- Google Gemini API key
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/Priyanshu-Ghosh-unplugged/foodloops-google-tech/edit/main/README.md
-   cd foodloops-google-tech
-   ```
+### 1. Clone the Repository
 
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Set up Firebase backend** (required):
-   - Follow the detailed setup guide in [`FIREBASE_SETUP.md`](./FIREBASE_SETUP.md)
-   - Create a Firebase project and get your configuration
-   - Create `.env.local` file with your Firebase credentials
-
-4. **Start the development server**:
-   ```bash
-   npm run dev
-   ```
-
-## 🔧 Environment Setup
-
-**⚠️ IMPORTANT**: You must set up Firebase before running the app.
-
-1. **Create `.env.local` file** in the project root:
-   ```bash
-   # Windows (PowerShell)
-   New-Item -Path ".env.local" -ItemType File
-   
-   # macOS/Linux
-   touch .env.local
-   ```
-
-2. **Add your Firebase configuration**:
-   ```env
-   VITE_FIREBASE_API_KEY=your_api_key_here
-   VITE_FIREBASE_AUTH_DOMAIN=your_project_id.firebaseapp.com
-   VITE_FIREBASE_PROJECT_ID=your_project_id
-   VITE_FIREBASE_STORAGE_BUCKET=your_project_id.appspot.com
-   VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
-   VITE_FIREBASE_APP_ID=your_app_id
-   VITE_FIREBASE_MEASUREMENT_ID=your_measurement_id
-   ```
-
-3. **Get Firebase configuration values**:
-   - Go to [Firebase Console](https://console.firebase.google.com/)
-   - Create a new project or select existing one
-   - Add a web app to your project
-   - Copy the configuration values
-
-For detailed Firebase setup instructions, see [`FIREBASE_SETUP.md`](./FIREBASE_SETUP.md).
-
-## Project info
-
-**URL**: https://lovable.dev/projects/1fb6561c-a802-477c-b339-3e1f5c8d5c1f
-
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/1fb6561c-a802-477c-b339-3e1f5c8d5c1f) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
+```bash
 git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+cd foodloops-google-tech
 ```
 
-**Edit a file directly in GitHub**
+### 2. Set Up Environment Variables
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+The project uses environment variables for configuration. Create a `.env` file in the root of the project and add the following:
 
-**Use GitHub Codespaces**
+```env
+# Firebase Configuration
+VITE_FIREBASE_API_KEY="your_firebase_api_key"
+VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_project.firebasestorage.app
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+VITE_FIREBASE_MEASUREMENT_ID=your_measurement_id
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+# Google Gemini AI API Key
+VITE_GEMINI_API_KEY=your_gemini_api_key_here
 
-## What technologies are used for this project?
+# Get a free Project ID at https://cloud.walletconnect.com/
+VITE_WALLETCONNECT_PROJECT_ID=
 
-This project is built with:
+# You can get this from the Civic developer portal
+VITE_CIVIC_CLIENT_ID=584fc3e9-922e-4b13-95af-cd0a9ea42ba2
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+The server also requires environment variables. Create a `.env` file in the `server/` directory:
+
+```env
+# Your MongoDB connection string
+MONGODB_URI=mongodb://localhost:27017/foodloops
+
+# A secret for signing JWTs (optional for local dev)
+JWT_SECRET=your-jwt-secret
+```
+
+### 3. Install Dependencies
+
+This project is a monorepo-style setup with separate dependencies for the root (frontend) and the server (backend).
+
+```bash
+# Install frontend dependencies
+npm install
+
+# Install backend dependencies
+cd server
+npm install
+cd ..
+```
+
+### 4. Run the Application
+
+To run both the frontend and backend servers concurrently, use the dev:full script from the root directory.
+
+```bash
+npm run dev:full
+```
+
+This will:
+- Start the Vite frontend development server on `http://localhost:5173` (or the next available port).
+- Start the Express backend server on `http://localhost:3001`.
+
+## 5. Blockchain Setup Guide
+
+Quick setup for Aptos and Ethereum integration in FoodLoops.
+
+### Prerequisites
+
+```bash
+# Install Aptos CLI
+curl -fsSL "https://aptos.dev/scripts/install_cli.py" | python3
+
+# Install Hardhat
+npm install -g hardhat
+```
+
+### Environment Variables
+
+Add to your `.env` file:
+
+```env
+# Aptos Configuration
+VITE_APTOS_NETWORK=devnet
+VITE_APTOS_NODE_URL=https://fullnode.devnet.aptoslabs.com
+VITE_FOOD_LOOPS_MODULE_ADDRESS=0x1
+
+# Ethereum Configuration
+VITE_ETHEREUM_NETWORK=sepolia
+VITE_ETHEREUM_RPC_URL=https://sepolia.infura.io/v3/YOUR_PROJECT_ID
+VITE_ETHEREUM_CHAIN_ID=11155111
+VITE_REWARDS_CONTRACT_ADDRESS=
+```
+
+### Deploy Contracts
+
+#### Aptos Move Contract
+
+```bash
+cd sources
+aptos init --profile devnet --network devnet
+aptos move compile
+aptos move publish --profile devnet --named-addresses food_loops_addr=<YOUR_ACCOUNT_ADDRESS>
+```
+
+Update `VITE_FOOD_LOOPS_MODULE_ADDRESS` with deployed address.
+
+#### Ethereum Solidity Contract
+
+```bash
+npx hardhat compile
+npx hardhat run scripts/deploy.cjs --network sepolia
+```
+
+Update `VITE_REWARDS_CONTRACT_ADDRESS` with deployed address.
+
+### Test Integration
+
+```bash
+# Test Aptos
+cd sources && aptos move test
+
+# Test Ethereum
+npx hardhat test
+
+# Start application
+npm run dev:full
+```
+
+### Verify Setup
+
+1. Navigate to Dashboard
+2. Check "Automated Rewards Manager" section
+3. Verify both Aptos and Ethereum connections work
+
+## Production Deployment
+
+### Aptos Mainnet
+
+```bash
+aptos move publish --profile mainnet --named-addresses food_loops_addr=<YOUR_ACCOUNT_ADDRESS>
+```
+
+### Ethereum Mainnet
+
+```bash
+npx hardhat run scripts/deploy.cjs --network mainnet
+```
+
+## Troubleshooting
+
+### Common Issues
+
+- **Aptos**: Verify module address and network
+- **Ethereum**: Check MetaMask connection and contract address
+- **Civic Auth**: Ensure credentials match frontend/backend
+- **Gemini AI**: Verify API key and check console for errors
+
+### Debug Commands
+
+```bash
+# Check Aptos account
+aptos account list --profile devnet
+
+# Check Ethereum network
+npx hardhat console --network sepolia
+
+# Verify contract deployment
+npx hardhat verify --network sepolia <CONTRACT_ADDRESS>
+```
+
+## 📜 Available Scripts
+
+### Root (package.json)
+
+- `dev`: Starts the Vite frontend server.
+- `build`: Builds the frontend for production.
+- `build:dev`: Builds the frontend in development mode.
+- `lint`: Lints the codebase.
+- `server`: Starts the backend server directly.
+- `dev:full`: Starts both frontend and backend servers concurrently.
+
+### Server (server/package.json)
+
+- `dev`: Starts the backend server with nodemon for auto-reloading.
+- `start`: Starts the backend server.
+- `seed`: Seeds the database with initial data.
+- `update-prices`: Runs the script to update product prices based on the dynamic pricing model.
+
+## 🤖 AI Chatbot Features
+
+The integrated Google Gemini-powered chatbot provides:
+
+- **Smart Food Recommendations**: Get personalized food deals and suggestions
+- **Recipe Assistance**: Find recipes based on available ingredients
+- **Sustainability Tips**: Learn about reducing food waste and eco-friendly practices
+- **Quick Responses**: Instant answers to common queries
+- **Contextual Conversations**: Maintains conversation history for better interactions
+
+### Chatbot Setup
+
+1. Get your Google Gemini API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Add the API key to your `.env` file
+3. The chatbot will appear as a floating button on all pages
+4. Click to start chatting with the AI assistant
+
+## 🌟 Contributing
+
+We welcome contributions! Please see our contributing guidelines for more details.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- Google Gemini AI for intelligent chatbot capabilities
+- Civic for decentralized authentication
+- The open-source community for amazing tools and libraries
