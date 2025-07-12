@@ -26,20 +26,11 @@ Experience the full FoodLoops platform with all features including the AI-powere
 - **TanStack Query** for state management
 - **Google Gemini AI** for intelligent chatbot
 
-### Web3
-- **Wagmi** and **Ethers.js** for Ethereum integration
-- **Civic Auth** for decentralized authentication
-- **WalletConnect** for wallet connections
-
 ### Backend
 - **Node.js** with **Express** framework
 - **MongoDB** with **Mongoose** ODM
 - **Firebase** for authentication and real-time features
 
-### Blockchain
-- **Rewards**: Solidity (Ethereum)
-- **Core Logic (WIP)**: Move (Aptos)
-- **Tooling**: Hardhat, Vercel, ESLint, Prettier
 
 ## 🚀 Getting Started
 
@@ -55,7 +46,7 @@ Follow these instructions to get the FoodLoops application running on your local
 ### 1. Clone the Repository
 
 ```bash
-git clone <YOUR_GIT_URL>
+git clone https://github.com/Priyanshu-Ghosh-unplugged/foodloops-google-tech
 cd foodloops-google-tech
 ```
 
@@ -76,11 +67,6 @@ VITE_FIREBASE_MEASUREMENT_ID=your_measurement_id
 # Google Gemini AI API Key
 VITE_GEMINI_API_KEY=your_gemini_api_key_here
 
-# Get a free Project ID at https://cloud.walletconnect.com/
-VITE_WALLETCONNECT_PROJECT_ID=
-
-# You can get this from the Civic developer portal
-VITE_CIVIC_CLIENT_ID=584fc3e9-922e-4b13-95af-cd0a9ea42ba2
 ```
 
 The server also requires environment variables. Create a `.env` file in the `server/` directory:
@@ -119,113 +105,13 @@ This will:
 - Start the Vite frontend development server on `http://localhost:5173` (or the next available port).
 - Start the Express backend server on `http://localhost:3001`.
 
-## 5. Blockchain Setup Guide
-
-Quick setup for Aptos and Ethereum integration in FoodLoops.
-
-### Prerequisites
-
-```bash
-# Install Aptos CLI
-curl -fsSL "https://aptos.dev/scripts/install_cli.py" | python3
-
-# Install Hardhat
-npm install -g hardhat
-```
-
-### Environment Variables
-
-Add to your `.env` file:
-
-```env
-# Aptos Configuration
-VITE_APTOS_NETWORK=devnet
-VITE_APTOS_NODE_URL=https://fullnode.devnet.aptoslabs.com
-VITE_FOOD_LOOPS_MODULE_ADDRESS=0x1
-
-# Ethereum Configuration
-VITE_ETHEREUM_NETWORK=sepolia
-VITE_ETHEREUM_RPC_URL=https://sepolia.infura.io/v3/YOUR_PROJECT_ID
-VITE_ETHEREUM_CHAIN_ID=11155111
-VITE_REWARDS_CONTRACT_ADDRESS=
-```
-
-### Deploy Contracts
-
-#### Aptos Move Contract
-
-```bash
-cd sources
-aptos init --profile devnet --network devnet
-aptos move compile
-aptos move publish --profile devnet --named-addresses food_loops_addr=<YOUR_ACCOUNT_ADDRESS>
-```
-
-Update `VITE_FOOD_LOOPS_MODULE_ADDRESS` with deployed address.
-
-#### Ethereum Solidity Contract
-
-```bash
-npx hardhat compile
-npx hardhat run scripts/deploy.cjs --network sepolia
-```
-
-Update `VITE_REWARDS_CONTRACT_ADDRESS` with deployed address.
-
-### Test Integration
-
-```bash
-# Test Aptos
-cd sources && aptos move test
-
-# Test Ethereum
-npx hardhat test
-
-# Start application
-npm run dev:full
-```
-
-### Verify Setup
-
-1. Navigate to Dashboard
-2. Check "Automated Rewards Manager" section
-3. Verify both Aptos and Ethereum connections work
-
-## Production Deployment
-
-### Aptos Mainnet
-
-```bash
-aptos move publish --profile mainnet --named-addresses food_loops_addr=<YOUR_ACCOUNT_ADDRESS>
-```
-
-### Ethereum Mainnet
-
-```bash
-npx hardhat run scripts/deploy.cjs --network mainnet
-```
 
 ## Troubleshooting
 
 ### Common Issues
 
-- **Aptos**: Verify module address and network
-- **Ethereum**: Check MetaMask connection and contract address
-- **Civic Auth**: Ensure credentials match frontend/backend
 - **Gemini AI**: Verify API key and check console for errors
 
-### Debug Commands
-
-```bash
-# Check Aptos account
-aptos account list --profile devnet
-
-# Check Ethereum network
-npx hardhat console --network sepolia
-
-# Verify contract deployment
-npx hardhat verify --network sepolia <CONTRACT_ADDRESS>
-```
 
 ## 📜 Available Scripts
 
