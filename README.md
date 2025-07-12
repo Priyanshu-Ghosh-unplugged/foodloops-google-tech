@@ -12,8 +12,8 @@ A modern e-commerce application built with React, TypeScript, and Firebase backe
 
 1. **Clone the repository**:
    ```bash
-   git clone <YOUR_GIT_URL>
-   cd <YOUR_PROJECT_NAME>
+   git clone https://github.com/Priyanshu-Ghosh-unplugged/foodloops-google-tech/edit/main/README.md
+   cd foodloops-google-tech
    ```
 
 2. **Install dependencies**:
