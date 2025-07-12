@@ -2,6 +2,12 @@
 
 FoodLoops is a dynamic web application designed to combat food waste by connecting sellers of surplus food with conscientious buyers. Leveraging a dynamic pricing model, prices for items decrease as their expiration dates approach, ensuring that food gets sold rather than discarded.
 
+## 🌐 Live Demo
+
+**Visit the live application:** [https://foodloops-google-tech.vercel.app/](https://foodloops-google-tech.vercel.app/)
+
+Experience the full FoodLoops platform with all features including the AI-powered chatbot, dynamic pricing, and community features.
+
 ## ✨ Key Features
 
 - **Dynamic Pricing**: An intelligent algorithm automatically reduces item prices as they near their expiration date, maximizing the chance of a sale.
