@@ -12,8 +12,8 @@ A modern e-commerce application built with React, TypeScript, and Firebase backe
 
 1. **Clone the repository**:
    ```bash
-   git clone <YOUR_GIT_URL>
-   cd <YOUR_PROJECT_NAME>
+   git clone https://github.com/Priyanshu-Ghosh-unplugged/foodloops-google-tech/edit/main/README.md
+   cd foodloops-google-tech
    ```
 
 2. **Install dependencies**:
@@ -122,15 +122,3 @@ This project is built with:
 - React
 - shadcn-ui
 - Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/1fb6561c-a802-477c-b339-3e1f5c8d5c1f) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
