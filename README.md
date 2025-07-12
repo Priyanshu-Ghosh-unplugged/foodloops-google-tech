@@ -1,4 +1,67 @@
-# Welcome to your Lovable project
+# FoodLoops - React + Firebase E-commerce App
+
+A modern e-commerce application built with React, TypeScript, and Firebase backend.
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- A Google account (for Firebase setup)
+
+### Setup Instructions
+
+1. **Clone the repository**:
+   ```bash
+   git clone <YOUR_GIT_URL>
+   cd <YOUR_PROJECT_NAME>
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Set up Firebase backend** (required):
+   - Follow the detailed setup guide in [`FIREBASE_SETUP.md`](./FIREBASE_SETUP.md)
+   - Create a Firebase project and get your configuration
+   - Create `.env.local` file with your Firebase credentials
+
+4. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
+
+## 🔧 Environment Setup
+
+**⚠️ IMPORTANT**: You must set up Firebase before running the app.
+
+1. **Create `.env.local` file** in the project root:
+   ```bash
+   # Windows (PowerShell)
+   New-Item -Path ".env.local" -ItemType File
+   
+   # macOS/Linux
+   touch .env.local
+   ```
+
+2. **Add your Firebase configuration**:
+   ```env
+   VITE_FIREBASE_API_KEY=your_api_key_here
+   VITE_FIREBASE_AUTH_DOMAIN=your_project_id.firebaseapp.com
+   VITE_FIREBASE_PROJECT_ID=your_project_id
+   VITE_FIREBASE_STORAGE_BUCKET=your_project_id.appspot.com
+   VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+   VITE_FIREBASE_APP_ID=your_app_id
+   VITE_FIREBASE_MEASUREMENT_ID=your_measurement_id
+   ```
+
+3. **Get Firebase configuration values**:
+   - Go to [Firebase Console](https://console.firebase.google.com/)
+   - Create a new project or select existing one
+   - Add a web app to your project
+   - Copy the configuration values
+
+For detailed Firebase setup instructions, see [`FIREBASE_SETUP.md`](./FIREBASE_SETUP.md).
 
 ## Project info
 
