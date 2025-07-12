@@ -159,5 +159,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 🙏 Acknowledgments
 
 - Google Gemini AI for intelligent chatbot capabilities
-- Civic for decentralized authentication
 - The open-source community for amazing tools and libraries
